@@ -8,7 +8,7 @@ Deploy users and public keys to your machines.
 Role Variables
 --------------
 
-Create an array with all users that need to be created on the system. You can set every parameter for the user that is available from http://docs.ansible.com/ansible/user_module.html. Also you can set every parameter (exept "user") for the key that is available from http://docs.ansible.com/ansible/authorized_key_module.html.
+Create an array with all users that need to be created on the system. You can set every parameter for the user that is available from http://docs.ansible.com/ansible/user_module.html. Also you can set every parameter (exept "user") for the key that is available from http://docs.ansible.com/ansible/authorized_key_module.html. The optional array "accounts_sshd_configs" allows to set sshd_config parameters.
 
     accounts_users:
     - name: __USERNAME__
@@ -17,6 +17,12 @@ Create an array with all users that need to be created on the system. You can se
       keys:
       - key: ssh-rsa AAA...
         state: present
+
+    accounts_sshd_configs:
+    - key: PermitRootLogin
+      value: 'no'
+    - key: AuthenticationMethods
+      value: 'publickey'
 
 Example Playbook
 ----------------
