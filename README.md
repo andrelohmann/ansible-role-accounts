@@ -1,6 +1,8 @@
 accounts
 =========
 
+[![Build Status](https://travis-ci.org/andrelohmann/ansible-role-accounts.svg?branch=master)](https://travis-ci.org/andrelohmann/ansible-role-accounts)
+
 Deploy users and public keys to your machines.
 
 Role Variables
