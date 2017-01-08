@@ -29,7 +29,7 @@
     system={{item.system|default(omit)}}
     uid={{item.uid|default(omit)}}
     update_password={{item.pdate_password|default(omit)}}
-  with_items: {{ accounts_users }}
+  with_items: accounts_users
 
 - name: create keys
   authorized_key:
