@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    accounts_users:
+    - name: test_user
+      uid: 1001
+      state: present
+      keys:
+      - key: ssh-rsa AAA...
+        state: present
+  roles:
+    - ansible-role-accounts

@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: andrelohmann
+  description: ansible galaxy role to deploy users and public keys
+  company: smartformer UG
+
+  license: MIT
+
+  min_ansible_version: 2.2
+
+  galaxy_tags:
+  - account
+  - user
+  - public
+  - key
+
+dependencies: []
+...
