@@ -9,6 +9,13 @@
       keys:
       - key: ssh-rsa AAA...
         state: present
+
+    accounts_sshd_configs:
+    - key: PermitRootLogin
+      value: 'no'
+    - key: AuthenticationMethods
+      value: 'publickey'
+
   roles:
     - ansible-role-accounts
 ...
