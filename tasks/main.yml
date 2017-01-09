@@ -47,7 +47,7 @@
 
 - name: set sshd configs
   lineinfile: dest=/etc/ssh/sshd_config regexp="^{{ item.key }}" line="{{ item.key }} {{ item.value }}" state=present
-  with_items: "{{ accounts_sshd_configs }}"
+  with_items: "{{ accounts_sshd_configs|default([]) }}"
   notify: restart sshd
   when: accounts_sshd_configs is defined
 
