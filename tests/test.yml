@@ -4,7 +4,7 @@
   vars:
     accounts_users:
     - name: test_user
-      uid: 1001
+      uid: 4001
       state: present
       keys:
       - key: ssh-rsa AAA...
