@@ -1,8 +1,8 @@
 ---
 
- - name: reboot sshd
-   service:
-     name: sshd
-     state: restarted
+- name: reboot sshd
+  service:
+    name: sshd
+    state: restarted
 
 ...
