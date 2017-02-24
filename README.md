@@ -27,8 +27,6 @@ Create an array with all users that need to be created on the system. You can se
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: accounts
       roles:
          - { role: andrelohmann.ansible-role-accounts }
