@@ -41,7 +41,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: accounts
       roles:
-         - { role: andrelohmann.ansible-role-accounts }
+         - { role: andrelohmann.accounts }
 
 License
 -------
