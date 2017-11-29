@@ -37,8 +37,6 @@ If you need additional users on host base, you can set an additional list **acco
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
     - hosts: accounts
       roles:
          - { role: andrelohmann.accounts }
