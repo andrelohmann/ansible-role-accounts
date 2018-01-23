@@ -14,7 +14,7 @@ Create a list with all users that need to be created on the system. You can set 
     - name: __USERNAME__
       uid: __UID__
       state: present
-      keys:
+      public_keys:
       - key: ssh-rsa AAA...
         state: present
 
@@ -30,7 +30,7 @@ If you need additional users on host base, you can set an additional list **acco
     - name: __USERNAME__
       uid: __UID__
       state: present
-      keys:
+      public_keys:
       - key: ssh-rsa AAA...
         state: present
 
