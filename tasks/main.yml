@@ -41,6 +41,7 @@
     path: "{{item.1.path|default(omit)}}"
     state: "{{item.1.state|default(omit)}}"
     validate_certs: "{{item.1.validate_certs|default(omit)}}"
+  when: item.0.state != 'absent'
   with_subelements:
   - "{{ accounts_users }} + {{ accounts_host_users }}"
   - public_keys
