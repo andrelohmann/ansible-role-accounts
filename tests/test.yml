@@ -7,14 +7,14 @@
     - name: test_user
       uid: 4001
       state: present
-      keys:
+      public_keys:
       - key: ssh-rsa AAA...
         state: present
     accounts_host_users:
     - name: test_user_2
       uid: 4002
       state: present
-      keys:
+      public_keys:
       - key: ssh-rsa AAABBB...
         state: present
 
