@@ -47,7 +47,11 @@
   - public_keys
 
 - name: set sshd configs
-  lineinfile: dest=/etc/ssh/sshd_config regexp="^{{ item.key }}" line="{{ item.key }} {{ item.value }}" state=present
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^{{ item.key }}"
+    line: "{{ item.key }} {{ item.value }}"
+    state: present
   with_items: "{{ accounts_sshd_configs|default([]) }}"
   notify: restart ssh
   when: accounts_sshd_configs is defined
