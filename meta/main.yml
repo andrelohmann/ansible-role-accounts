@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: accounts
   author: andrelohmann
   description: ansible galaxy role to deploy users and public keys
   company: smartformer UG
@@ -9,12 +10,20 @@ galaxy_info:
   min_ansible_version: 2.7
 
   platforms:
+    - name: Debian
+      versions:
+      - jessie
+      - stretch
+      - buster
     - name: Ubuntu
       versions:
       - xenial
-    - name: Debian
+      - bionic
+    - name: EL
       versions:
-      - stretch
+      - 6
+      - 7
+      - 8
 
   galaxy_tags:
   - account
