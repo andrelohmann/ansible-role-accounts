@@ -7,6 +7,8 @@
     - name: test_user
       uid: 4001
       state: present
+      groups:
+      - sudo
       public_keys:
       - key: ssh-rsa AAA...
         state: present
@@ -14,6 +16,7 @@
     - name: test_user_2
       uid: 4002
       state: present
+      groups: []
       public_keys:
       - key: ssh-rsa AAABBB...
         state: present

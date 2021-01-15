@@ -14,6 +14,8 @@ Create a list with all users that need to be created on the system. You can set 
     - name: __USERNAME__
       uid: __UID__
       state: present
+      groups:
+      - sudo
       public_keys:
       - key: ssh-rsa AAA...
         state: present
@@ -22,7 +24,9 @@ Create a list with all users that need to be created on the system. You can set 
     - key: PermitRootLogin
       value: 'no'
     - key: AuthenticationMethods
-      value: 'publickey'
+      value: 'publickey password'
+    - PasswordAuthentication
+      value: 'yes'
 
 If you need additional users on host base, you can set an additional list **accounts_host_users**.
 
@@ -30,6 +34,8 @@ If you need additional users on host base, you can set an additional list **acco
     - name: __USERNAME__
       uid: __UID__
       state: present
+      groups:
+      - sudo
       public_keys:
       - key: ssh-rsa AAA...
         state: present
