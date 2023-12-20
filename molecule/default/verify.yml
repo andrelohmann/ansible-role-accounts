@@ -1,0 +1,21 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+
+  - name: Run id against testuser
+    ansible.builtin.shell: id -u test_user
+    register: user_status
+
+  - name: Dump user status
+    ansible.builtin.debug:
+      var: user_status
+
+  - name: Assert user status includes
+    ansible.builtin.assert:
+      that: user_status.stdout is search('4001')
+
+...

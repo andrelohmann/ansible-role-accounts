@@ -1,7 +1,8 @@
 ---
-- hosts: localhost
+- hosts: all
   become: true
   become_method: sudo
+
   vars:
     accounts_users:
     - name: test_user
@@ -28,5 +29,7 @@
       value: 'publickey'
 
   roles:
-    - ansible-role-accounts
+  - andrelohmann.root_colored_prompt
+  - ansible-role-accounts
+
 ...
