@@ -1,59 +1,66 @@
 ---
 
-- name: create all users
-  user:
-    append: "{{item.append|default(omit)}}"
-    comment: "{{item.comment|default(omit)}}"
-    createhome: "{{item.reatehome|default(omit)}}"
-    expires: "{{item.expires|default(omit)}}"
-    force: "{{item.force|default(omit)}}"
-    generate_ssh_key: "{{item.generate_ssh_key|default(omit)}}"
-    group: "{{item.group|default(omit)}}"
-    groups: "{{item.groups|default(omit)}}"
-    home: "{{item.home|default(omit)}}"
-    login_class: "{{item.login_class|default(omit)}}"
-    move_home: "{{item.move_home|default(omit)}}"
-    name: "{{item.name|default(omit)}}"
-    non_unique: "{{item.non_unique|default(omit)}}"
-    password: "{{item.password|default(omit)}}"
-    remove: "{{item.remove|default(omit)}}"
-    seuser: "{{item.seuser|default(omit)}}"
-    shell: "{{item.shell|default(omit)}}"
-    skeleton: "{{item.skeleton|default(omit)}}"
-    ssh_key_bits: "{{item.ssh_key_bits|default(omit)}}"
-    ssh_key_comment: "{{item.ssh_key_comment|default(omit)}}"
-    ssh_key_file: "{{item.ssh_key_file|default(omit)}}"
-    ssh_key_passphrase: "{{item.ssh_key_passphrase|default(omit)}}"
-    ssh_key_type: "{{item.ssh_key_type|default(omit)}}"
-    state: "{{item.state|default(omit)}}"
-    system: "{{item.system|default(omit)}}"
-    uid: "{{item.uid|default(omit)}}"
-    update_password: "{{item.update_password|default(omit)}}"
-  with_items: "{{ accounts_users }} + {{ accounts_host_users }}"
+- name: Create all users
+  ansible.builtin.user:
+    append: "{{ item.append | default(omit) }}"
+    comment: "{{ item.comment | default(omit) }}"
+    create_home: "{{ item.create_home | default(omit) }}"
+    expires: "{{ item.expires | default(omit) }}"
+    force: "{{ item.force | default(omit) }}"
+    generate_ssh_key: "{{ item.generate_ssh_key | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | default(omit) }}"
+    home: "{{ item.home | default(omit) }}"
+    login_class: "{{ item.login_class | default(omit) }}"
+    move_home: "{{ item.move_home | default(omit) }}"
+    name: "{{ item.name | default(omit) }}"
+    non_unique: "{{ item.non_unique | default(omit) }}"
+    password: "{{ item.password | default(omit) }}"
+    password_expire_max: "{{ item.password_expire_max | default(omit) }}"
+    password_expire_min: "{{ item.password_expire_min | default(omit) }}"
+    password_expire_warn: "{{ item.password_expire_warn | default(omit) }}"
+    password_lock: "{{ item.password_lock | default(omit) }}"
+    remove: "{{ item.remove | default(omit) }}"
+    seuser: "{{ item.seuser | default(omit) }}"
+    shell: "{{ item.shell | default(omit) }}"
+    skeleton: "{{ item.skeleton | default(omit) }}"
+    ssh_key_bits: "{{ item.ssh_key_bits | default(omit) }}"
+    ssh_key_comment: "{{ item.ssh_key_comment | default(omit) }}"
+    ssh_key_file: "{{ item.ssh_key_file | default(omit) }}"
+    ssh_key_passphrase: "{{ item.ssh_key_passphrase | default(omit) }}"
+    ssh_key_type: "{{ item.ssh_key_type | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    system: "{{ item.system | default(omit) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    unmask: "{{ item.unmask | default(omit) }}"
+    update_password: "{{ item.update_password | default(omit) }}"
+  with_items: "{{ accounts_users + accounts_host_users }}"
 
-- name: create keys
-  authorized_key:
-    user: "{{item.0.name}}"
-    key: "{{item.1.key}}"
-    exclusive: "{{item.1.exclusive|default(omit)}}"
-    key_options: "{{item.1.key_options|default(omit)}}"
-    manage_dir: "{{item.1.manage_dir|default(omit)}}"
-    path: "{{item.1.path|default(omit)}}"
-    state: "{{item.1.state|default(omit)}}"
-    validate_certs: "{{item.1.validate_certs|default(omit)}}"
+- name: Create keys
+  ansible.posix.authorized_key:
+    comment: "{{ item.1.comment | default(omit) }}"
+    exclusive: "{{ item.1.exclusive | default(omit) }}"
+    follow: "{{ item.1.follow | default(omit) }}"
+    key: "{{ item.1.key }}"
+    key_options: "{{ item.1.key_options | default(omit) }}"
+    manage_dir: "{{ item.1.manage_dir | default(omit) }}"
+    path: "{{ item.1.path | default(omit) }}"
+    state: "{{ item.1.state | default(omit) }}"
+    user: "{{ item.0.name }}"
+    validate_certs: "{{ item.1.validate_certs | default(omit) }}"
   when: item.0.state != 'absent'
   with_subelements:
-  - "{{ accounts_users }} + {{ accounts_host_users }}"
+  - "{{ accounts_users + accounts_host_users }}"
   - public_keys
 
-- name: set sshd configs
-  lineinfile:
+- name: Set sshd configs
+  ansible.builtin.lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^{{ item.key }}"
     line: "{{ item.key }} {{ item.value }}"
     state: present
-  with_items: "{{ accounts_sshd_configs|default([]) }}"
-  notify: restart ssh
+  with_items: "{{ accounts_sshd_configs | default([]) }}"
+  notify: Restart ssh
   when: accounts_sshd_configs is defined
 
 ...

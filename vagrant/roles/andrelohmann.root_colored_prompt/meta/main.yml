@@ -1,9 +1,9 @@
 ---
 galaxy_info:
-  role_name: accounts
+  role_name: root_colored_prompt
   author: andrelohmann
-  description: ansible galaxy role to deploy users and public keys
-  company: CloudCourse GmbH
+  description: ansible galaxy role to switch on colored prompt for vagrant root user
+  company: CloudSails GmbH
 
   license: MIT
 
@@ -12,15 +12,12 @@ galaxy_info:
   platforms:
   - name: Ubuntu
     versions:
-    - jammy
-    - focal
     - bionic
+    - focal
+    - jammy
 
   galaxy_tags:
-  - account
-  - user
-  - public
-  - key
+  - vagrant
 
 dependencies: []
 ...
