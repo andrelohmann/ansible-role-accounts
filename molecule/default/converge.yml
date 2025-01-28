@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   become: true
-  become_method: sudo
+  become_method: ansible.builtin.sudo
 
   vars:
     accounts_users:
@@ -24,7 +24,7 @@
         state: present
 
   tasks:
-  - name: "Include andrelohmann.accounts"
-    include_role:
+  - name: Include andrelohmann.accounts
+    ansible.builtin.include_role:
       name: "andrelohmann.accounts"
 ...

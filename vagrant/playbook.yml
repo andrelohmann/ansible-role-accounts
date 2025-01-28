@@ -1,7 +1,8 @@
 ---
-- hosts: all
+- name: Install
+  hosts: all
   become: true
-  become_method: sudo
+  become_method: ansible.builtin.sudo
 
   vars:
     accounts_users:
@@ -29,7 +30,7 @@
       value: 'publickey'
 
   roles:
-  - andrelohmann.root_colored_prompt
-  - ansible-role-accounts
+  - name: andrelohmann.root_colored_prompt
+  - name: ansible-role-accounts
 
 ...

@@ -7,8 +7,9 @@
   tasks:
 
   - name: Run id against testuser
-    ansible.builtin.shell: id -u test_user
+    ansible.builtin.command: id -u test_user
     register: user_status
+    changed_when: false
 
   - name: Dump user status
     ansible.builtin.debug:
